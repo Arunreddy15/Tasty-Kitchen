@@ -1,13 +1,13 @@
 import {Component} from 'react'
 
-import CartContext from '../../Context/CartContext'
+import Context from '../../context/Context'
 import './index.css'
 import EmptyCart from '../EmptyCart'
 
 class Cart extends Component {
   render() {
     return (
-      <CartContext.Consumer>
+      <Context.Consumer>
         {value => {
           const {cartList} = value
           const showEmptyView = cartList.length === 0
@@ -27,7 +27,7 @@ class Cart extends Component {
             </>
           )
         }}
-      </CartContext.Consumer>
+      </Context.Consumer>
     )
   }
 }
