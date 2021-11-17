@@ -1,0 +1,52 @@
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 90vh;
+}
+.error-pic {
+  height: 200px;
+  margin: 10px;
+}
+.error-heading {
+  color: #1e293b;
+  margin: 10px 0;
+  font-size: 24px;
+}
+.error-description {
+  color: #64748b;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 16px;
+}
+.nav-link {
+  text-decoration: none;
+}
+.error-page-btn {
+  background-color: #f7931e;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  border: 0;
+  margin-top: 10px;
+  font-weight: 600;
+}
+@media (max-width: 552px) {
+  .error-pic {
+    height: 180px;
+    margin: 10px;
+  }
+  .error-heading {
+    color: #1e293b;
+    margin: 10px 0;
+    font-size: 20px;
+  }
+  .error-description {
+    color: #64748b;
+    text-align: center;
+    margin: 8px 0;
+    font-size: 14px;
+    width: 80%;
+  }
+}

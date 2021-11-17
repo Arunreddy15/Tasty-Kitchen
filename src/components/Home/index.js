@@ -1,7 +1,8 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import {Link} from 'react-router-dom'
 import {BsFilterLeft, BsFillStarFill} from 'react-icons/bs'
-import {AiOutlineLeftSquare, AiOutlineRightSquare} from 'react-icons/ai'
+import {AiOutlineLeft, AiOutlineRight} from 'react-icons/ai'
 import Loader from 'react-loader-spinner'
 import Slider from 'react-slick'
 import Navbar from '../Navbar'
@@ -59,7 +60,7 @@ class Home extends Component {
     }
     const response = await fetch(url, options)
     const offers = await fetch(offersUrl, options)
-    const data = await response.json
+    const data = await response.json()
     const {total} = data
     const offersImages = await offers.json()
     if (response.ok === true) {
@@ -104,11 +105,12 @@ class Home extends Component {
   onDecrease = () => {
     const {activePage, limit} = this.state
     const offset = (activePage - 1) * limit
-    if (activePage > 0) {
+
+    if (activePage > 1) {
       this.setState(
         prevState => ({
           activePage: prevState.activePage - 1,
-          offset: prevState.offset - offset,
+          offset,
         }),
         this.getData,
       )
@@ -116,13 +118,14 @@ class Home extends Component {
   }
 
   onIncrease = () => {
-    const {activePage, limit} = this.state
-
-    if (activePage > 0) {
+    const {activePage, limit, totalHotels} = this.state
+    const offset = (activePage - 1) * limit
+    console.log(offset)
+    if (activePage < Math.ceil(totalHotels / limit) + 1) {
       this.setState(
         prevState => ({
           activePage: prevState.activePage + 1,
-          offset: prevState.offset + limit,
+          offset,
         }),
         this.getData,
       )
@@ -130,12 +133,12 @@ class Home extends Component {
   }
 
   renderRestaurants = () => {
-    const {restaurants, activePage, totalHotels, limit} = this.state
+    const {restaurants} = this.state
     return (
-      <div>
-        <ul className="restaurants-list">
-          {restaurants.map(each => (
-            <li key={each.id}>
+      <ul className="restaurants-list">
+        {restaurants.map(each => (
+          <li key={each.id}>
+            <Link to={`restaurant/${each.id}`} className="item-link">
               <img src={each.imageUrl} alt={each.name} className="rest-img" />
               <div className="restaurants-list-details-container">
                 <h1 className="restaurant-name">{each.name}</h1>
@@ -149,28 +152,16 @@ class Home extends Component {
                   </p>
                 </div>
               </div>
-            </li>
-          ))}
-        </ul>
-        <div className="pagination">
-          <button type="button" onClick={this.onDecrease}>
-            <AiOutlineLeftSquare size={24} />
-          </button>
-
-          <p>
-            {activePage} of {totalHotels / limit + 1}
-          </p>
-          <button type="button" onClick={this.onIncrease}>
-            <AiOutlineRightSquare size={24} />
-          </button>
-        </div>
-      </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
     )
   }
 
   renderLoading = () => (
     <div className="loader-container" testid="loader">
-      <Loader type="ThreeDots" color="#f7931e" height="50" width="50" />
+      <Loader type="Circles" color="#f7931e" height="40" width="50" />
     </div>
   )
 
@@ -187,7 +178,7 @@ class Home extends Component {
   }
 
   render() {
-    const {offerImages} = this.state
+    const {offerImages, activePage, totalHotels, limit} = this.state
     const settings = {
       dots: true,
     }
@@ -208,7 +199,7 @@ class Home extends Component {
             <div>
               <h1 className="home-heading">Popular Restaurant</h1>
               <div className="text-filter">
-                <p>
+                <p className="home-tag-text">
                   Select your favorite restaurant special dish and make your day
                   happy..
                 </p>
@@ -225,7 +216,21 @@ class Home extends Component {
                 </div>
               </div>
               <hr />
-              {this.renderData()}
+              <div>
+                {this.renderData()}
+                <div className="pagination">
+                  <button type="button" onClick={this.onDecrease}>
+                    <AiOutlineLeft size={20} />
+                  </button>
+
+                  <p>
+                    {activePage} of {Math.ceil(totalHotels / limit) + 1}
+                  </p>
+                  <button type="button" onClick={this.onIncrease}>
+                    <AiOutlineRight size={20} />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
