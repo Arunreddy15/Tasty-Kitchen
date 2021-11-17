@@ -1,4 +1,3 @@
-/* eslint-disable react/self-closing-comp */
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import './index.css'
@@ -12,7 +11,6 @@ class Login extends Component {
   }
 
   submitSuccess = jwtToken => {
-    // console.log(jwtToken)
     const {history} = this.props
     Cookies.set('jwt_token', jwtToken, {expires: 30})
     history.replace('/')
