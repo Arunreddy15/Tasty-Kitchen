@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {Link} from 'react-router-dom'
-import {BsFilterLeft, BsFillStarFill} from 'react-icons/bs'
+import {BsFilterLeft, BsFillStarFill, BsSearch} from 'react-icons/bs'
 import {AiOutlineLeft, AiOutlineRight} from 'react-icons/ai'
 import Loader from 'react-loader-spinner'
 import Slider from 'react-slick'
@@ -42,27 +42,54 @@ class Home extends Component {
     restaurants: [],
     selectedSortByValue: '',
     totalHotels: 0,
+    offerLoader: false,
+    searchInput: '',
   }
 
   componentDidMount() {
     this.getData()
+    this.getOffersImages()
+  }
+
+  onClickSearch = () => {
+    // const {restaurants, searchInput} = this.setState
+    // const rest = restaurants.filter(each => each.includes(searchInput))
+    // this.setState({restaurants: rest})
+    this.getData()
+  }
+
+  getOffersImages = async () => {
+    this.setState({offerLoader: true})
+    const options = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    }
+    const offersUrl = 'https://apis.ccbp.in/restaurants-list/offers'
+    const offers = await fetch(offersUrl, options)
+    const offersImages = await offers.json()
+    if (offers.ok === true) {
+      const offerObject = offersImages.offers.map(each => ({
+        imageUrl: each.image_url,
+        id: each.id,
+      }))
+      this.setState({offerImages: offerObject, offerLoader: false})
+    }
   }
 
   getData = async () => {
-    const {selectedSortByValue, offset, limit} = this.state
+    const {selectedSortByValue, offset, limit, searchInput} = this.state
     this.setState({apiStatus: apiStatusConstants.inProgress})
-    const url = `https://apis.ccbp.in/restaurants-list/?offset=${offset}&limit=${limit}&sort_by_rating=${selectedSortByValue}`
-    const offersUrl = 'https://apis.ccbp.in/restaurants-list/offers'
+    const url = `https://apis.ccbp.in/restaurants-list/?search=${searchInput}&offset=${offset}&limit=${limit}&sort_by_rating=${selectedSortByValue}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
     const response = await fetch(url, options)
-    const offers = await fetch(offersUrl, options)
+
     const data = await response.json()
     const {total} = data
-    const offersImages = await offers.json()
     if (response.ok === true) {
       const restaurantsObject = data.restaurants.map(each => ({
         costForTwo: each.cost_for_two,
@@ -84,13 +111,9 @@ class Home extends Component {
           totalReviews: each.user_rating.total_reviews,
         },
       }))
-      const offerObject = offersImages.offers.map(each => ({
-        imageUrl: each.image_url,
-        id: each.id,
-      }))
+
       this.setState({
         apiStatus: apiStatusConstants.success,
-        offerImages: offerObject,
         restaurants: restaurantsObject,
         totalHotels: total,
       })
@@ -98,6 +121,8 @@ class Home extends Component {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
+
+  onChangeSearch = event => this.setState({searchInput: event.target.value})
 
   onChangeSort = event =>
     this.setState({selectedSortByValue: event.target.value}, this.getData)
@@ -137,9 +162,9 @@ class Home extends Component {
     return (
       <ul className="restaurants-list">
         {restaurants.map(each => (
-          <li key={each.id}>
+          <li key={each.id} testid="restaurant-item">
             <Link to={`restaurant/${each.id}`} className="item-link">
-              <img src={each.imageUrl} alt={each.name} className="rest-img" />
+              <img src={each.imageUrl} alt="restaurant" className="rest-img" />
               <div className="restaurants-list-details-container">
                 <h1 className="restaurant-name">{each.name}</h1>
                 <p className="restaurant-cuisine">{each.cuisine}</p>
@@ -160,7 +185,7 @@ class Home extends Component {
   }
 
   renderLoading = () => (
-    <div className="loader-container" testid="loader">
+    <div className="loader-container" testid="restaurants-list-loader">
       <Loader type="Circles" color="#f7931e" height="40" width="50" />
     </div>
   )
@@ -178,7 +203,15 @@ class Home extends Component {
   }
 
   render() {
-    const {offerImages, activePage, totalHotels, limit} = this.state
+    const {
+      offerImages,
+      activePage,
+      totalHotels,
+      limit,
+      offerLoader,
+      searchInput,
+    } = this.state
+
     const settings = {
       dots: true,
     }
@@ -187,15 +220,33 @@ class Home extends Component {
         <Navbar />
         <div className="home-container">
           <div className="home-content">
-            <div className="carousel-container">
-              <Slider {...settings}>
-                {offerImages.map(each => (
-                  <div key={each.id}>
-                    <img src={each.imageUrl} alt="co" className="carousel" />
-                  </div>
-                ))}
-              </Slider>
-            </div>
+            {offerLoader ? (
+              <div
+                className="loader-container"
+                testid="restaurants-offers-loader"
+              >
+                <Loader
+                  type="ThreeDots"
+                  color="#f7931e"
+                  height="40"
+                  width="50"
+                />
+              </div>
+            ) : (
+              <div className="carousel-container">
+                <Slider {...settings}>
+                  {offerImages.map(each => (
+                    <div key={each.id}>
+                      <img
+                        src={each.imageUrl}
+                        alt="offer"
+                        className="carousel"
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            )}
             <div>
               <h1 className="home-heading">Popular Restaurant</h1>
               <div className="text-filter">
@@ -217,17 +268,30 @@ class Home extends Component {
               </div>
               <hr />
               <div>
+                <div>
+                  <input
+                    type="search"
+                    placeholder="Enter restaurant name"
+                    onChange={this.onChangeSearch}
+                    value={searchInput}
+                  />
+                  <BsSearch size={24} onClick={this.onClickSearch} />
+                </div>
                 {this.renderData()}
                 <div className="pagination">
                   <button type="button" onClick={this.onDecrease}>
-                    <AiOutlineLeft size={20} />
+                    <AiOutlineLeft size={20} testid="pagination-left-button" />
                   </button>
 
                   <p>
-                    {activePage} of {Math.ceil(totalHotels / limit) + 1}
+                    <span testid="active-page-number">{activePage}</span> of
+                    {Math.ceil(totalHotels / limit) + 1}
                   </p>
                   <button type="button" onClick={this.onIncrease}>
-                    <AiOutlineRight size={20} />
+                    <AiOutlineRight
+                      size={20}
+                      testid="pagination-right-button"
+                    />
                   </button>
                 </div>
               </div>

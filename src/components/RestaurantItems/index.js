@@ -59,7 +59,7 @@ class RestaurantItems extends Component {
   }
 
   renderLoading = () => (
-    <div className="loader-container" testid="loader">
+    <div className="loader-container" testid="restaurant-details-loader">
       <Loader type="Circles" color="#f7931e" height="40" width="50" />
     </div>
   )

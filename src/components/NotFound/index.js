@@ -8,7 +8,7 @@ const NotFound = () => (
     <div className="error-page">
       <img
         src="https://res.cloudinary.com/imagelinks/image/upload/v1636974844/erroring_1_nahgya.png"
-        alt="Error"
+        alt="not found"
         className="error-pic"
       />
       <h1 className="error-heading">Page Not Found</h1>

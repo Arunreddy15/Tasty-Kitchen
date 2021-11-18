@@ -6,7 +6,7 @@ const EmptyCart = () => (
     <div className="cart-image-container">
       <img
         src="https://res.cloudinary.com/imagelinks/image/upload/v1636977387/cooking_1_gd8tle.png"
-        alt="empty-cart"
+        alt="empty cart"
         className="cart-empty-pic"
       />
       <h1 className="empty-cart-heading">No Orders yet!</h1>

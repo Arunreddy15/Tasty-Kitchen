@@ -12,7 +12,7 @@ class Items extends Component {
     const {item} = this.props
     const {id, imageUrl, name, foodType, cost} = item
     return (
-      <li key={id}>
+      <li key={id} testid="foodItem">
         <img src={imageUrl} alt={name} />
         <h1>{name}</h1>
         <p>{foodType}</p>
@@ -23,9 +23,15 @@ class Items extends Component {
           </button>
         ) : (
           <div>
-            <AiOutlinePlusSquare onClick={this.onClickPlus} />
+            <AiOutlineMinusSquare
+              onClick={this.onClickMinus}
+              testid="decrement-count"
+            />
             {itemsSize}
-            <AiOutlineMinusSquare onClick={this.onClickMinus} />
+            <AiOutlinePlusSquare
+              onClick={this.onClickPlus}
+              testid="increment-count"
+            />
           </div>
         )}
       </li>

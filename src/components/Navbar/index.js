@@ -24,7 +24,7 @@ class Navbar extends Component {
             <div className="logo-container">
               <img
                 src="https://res.cloudinary.com/imagelinks/image/upload/v1636799192/Frame_274_xmzte1.png"
-                alt="logo"
+                alt="website logo"
                 className="nav-logo-pic"
               />
               <p className="nav-logo-text">Tasty Kitchens</p>

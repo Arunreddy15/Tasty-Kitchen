@@ -89,7 +89,7 @@ class Login extends Component {
           <div className="container">
             <img
               src="https://res.cloudinary.com/imagelinks/image/upload/v1636799192/Frame_274_xmzte1.png"
-              alt="logo"
+              alt="website logo"
               className="logo-pic"
             />
             <p className="logo-text">Tasty Kitchens</p>
@@ -101,7 +101,7 @@ class Login extends Component {
         <div className="image-container">
           <img
             src="https://res.cloudinary.com/imagelinks/image/upload/v1636798203/Rectangle_1456_xwkqpk.png"
-            alt="food-item"
+            alt="website login"
             className="login-pic"
           />
         </div>
