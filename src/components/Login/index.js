@@ -16,8 +16,8 @@ class Login extends Component {
     history.replace('/')
   }
 
-  submitFailure = errorMsg => {
-    this.setState({showErrorMsg: true, errorMsg})
+  submitFailure = error => {
+    this.setState({showErrorMsg: true, errorMsg: error})
   }
 
   onChangeUsername = event => {
@@ -38,9 +38,10 @@ class Login extends Component {
     }
     const response = await fetch('https://apis.ccbp.in/login', options)
     const data = await response.json()
+
     if (response.ok === true) {
-      console.log(data.jw_token)
       this.submitSuccess(data.jwt_token)
+      console.log(data)
     } else {
       this.submitFailure(data.error_msg)
     }

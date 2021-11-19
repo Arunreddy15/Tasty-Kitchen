@@ -1,8 +1,11 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
+import {BsFillStarFill} from 'react-icons/bs'
 import './index.css'
 import Items from '../Items'
+import Footer from '../Footer'
+import Navbar from '../Navbar'
 
 const jwtToken = Cookies.get('jwt_token')
 const apiConstants = {
@@ -34,17 +37,17 @@ class RestaurantItems extends Component {
     const data = await response.json()
     if (response.ok === true) {
       const restaurantItems = {
-        rating: data.example.rating,
-        id: data.example.id,
-        name: data.example.name,
-        cuisine: data.example.cuisine,
-        costForTwo: data.example.cost_for_two,
-        imageUrl: data.example.image_url,
-        reviewsCount: data.example.reviews_count,
-        opensAt: data.example.opens_at,
-        itemsCount: data.example.items_count,
-        location: data.example.location,
-        foodItems: data.example.food_items.map(each => ({
+        rating: data.rating,
+        id: data.id,
+        name: data.name,
+        cuisine: data.cuisine,
+        costForTwo: data.cost_for_two,
+        imageUrl: data.image_url,
+        reviewsCount: data.reviews_count,
+        opensAt: data.opens_at,
+        itemsCount: data.items_count,
+        location: data.location,
+        foodItems: data.food_items.map(each => ({
           name: each.name,
           cost: each.cost,
           imageUrl: each.image_url,
@@ -66,19 +69,59 @@ class RestaurantItems extends Component {
 
   renderData = () => {
     const {restaurantItems} = this.state
+    const {
+      imageUrl,
+      name,
+      cuisine,
+      rating,
+      location,
+      costForTwo,
+      reviewsCount,
+    } = restaurantItems
     const {foodItems} = restaurantItems
     return (
-      <ul>
-        {foodItems.map(each => (
-          <Items item={each} />
-        ))}
-      </ul>
+      <div>
+        <Navbar />
+        <div className="restaurant-details-container">
+          <div className="restaurant-details">
+            <img src={imageUrl} alt="restaurant" className="restaurant-image" />
+            <div className="restaurant-info">
+              <h1 className="restaurant-det-name">{name}</h1>
+              <p className="restaurant-det-cuisine">{cuisine}</p>
+              <p className="restaurant-det-location">{location}</p>
+              <div className="rating-det-cost">
+                <div className="r-c">
+                  <div className="s-r">
+                    <BsFillStarFill />
+                    <p className="restaurant-rating">{rating}</p>
+                  </div>
+                  <p className="tags">{`${reviewsCount}+rating`}</p>
+                </div>
+
+                <hr className="hr" />
+                <div>
+                  <p className="restaurant-costForTwo">{costForTwo}</p>
+                  <p className="tags">Cost for Two</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="restaurant-details-bottom-container">
+          <ul className="items-container">
+            {foodItems.map(each => (
+              <Items item={each} />
+            ))}
+          </ul>
+        </div>
+        <Footer />
+      </div>
     )
   }
 
   renderFailureData = () => {}
 
-  renderData = () => {
+  renderDataOc = () => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiConstants.inProgress:
@@ -93,7 +136,7 @@ class RestaurantItems extends Component {
   }
 
   render() {
-    return this.renderData()
+    return this.renderDataOc()
   }
 }
 export default RestaurantItems

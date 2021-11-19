@@ -86,10 +86,15 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
-    width: 32%;
+    width: 32.5%;
     height: 33.3%;
     margin-right: 10px;
     margin-bottom: 20px;
+  }
+  .restaurant-item {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
   }
   .restaurants-list-details-container {
     height: 100%;
@@ -150,6 +155,14 @@
   button {
     background-color: transparent;
     border: 0;
+  }
+  .item-link {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
   }
 }
 
@@ -294,5 +307,8 @@
     justify-content: center;
     align-items: center;
     height: 400px;
+  }
+  .item-link {
+    text-decoration: none;
   }
 }
