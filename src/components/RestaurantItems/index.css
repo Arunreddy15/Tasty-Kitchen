@@ -1,62 +1,153 @@
-.restaurant-details-container {
-  background-image: url(https://res.cloudinary.com/imagelinks/image/upload/v1636974674/Frame_279_dzodsp.png);
-  background-size: cover;
-  height: 300px;
-  object-fit: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@media (max-width: 772px) {
+  .restaurant-details-container {
+    background-image: url(https://res.cloudinary.com/imagelinks/image/upload/v1636974674/Frame_279_dzodsp.png);
+    background-size: cover;
+    height: 180px;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .restaurant-details {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .restaurant-info {
+    position: relative;
+    left: -20px;
+    color: #fff;
+    /* margin-left: 20px; */
+    display: flex;
+    flex-direction: column;
+    height: 160px;
+    justify-content: space-around;
+    width: 200px;
+  }
+  .restaurant-det-name {
+    color: #fff;
+    font-size: 18px;
+  }
+  .restaurant-det-cuisine,
+  .restaurant-det-location {
+    font-size: 12px;
+  }
+  .restaurant-image {
+    border-radius: 45%;
+    width: 180px;
+    height: 180px;
+
+    position: relative;
+    left: -40px;
+    top: -40px;
+  }
+  .restaurant-details-bottom-container {
+    display: flex;
+    justify-content: center;
+  }
+  .items-container {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    width: 90%;
+    margin: 30px 0;
+    box-sizing: border-box;
+  }
+  .rating-det-cost {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
+  }
+  .restaurant-rating {
+    font-size: 12px;
+  }
+  .star {
+    font-size: 12px;
+    margin-right: 5px;
+  }
+  .tags {
+    font-size: 12px;
+  }
+  .hr {
+    height: 25px;
+    width: 1px;
+  }
+  .restaurant-costForTwo {
+    font-size: 12px;
+  }
+  .r-c {
+    display: flex;
+    flex-direction: column;
+  }
+  .s-r {
+    display: flex;
+  }
+  .s-r p {
+    /* margin-left: 10px; */
+  }
 }
-.restaurant-details {
-  width: 90%;
-  display: flex;
-  align-items: center;
-}
-.restaurant-info {
-  color: #fff;
-  margin-left: 20px;
-  display: flex;
-  flex-direction: column;
-  height: 180px;
-  justify-content: space-around;
-}
-.restaurant-det-name {
-  color: #fff;
-}
-.restaurant-image {
-  height: 220px;
-  width: 380px;
-  border-radius: 10px;
-}
-.restaurant-details-bottom-container {
-  display: flex;
-  justify-content: center;
-}
-.items-container {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  width: 90%;
-  margin: 30px 0;
-  box-sizing: border-box;
-}
-.rating-det-cost {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 250px;
-}
-.hr {
-  height: 25px;
-  width: 1px;
-}
-.r-c {
-  display: flex;
-  flex-direction: column;
-}
-.s-r {
-  display: flex;
-}
-.s-r p {
-  margin-left: 10px;
+@media screen and (min-width: 772px) {
+  .restaurant-details-container {
+    background-image: url(https://res.cloudinary.com/imagelinks/image/upload/v1636974674/Frame_279_dzodsp.png);
+    background-size: cover;
+    height: 300px;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .restaurant-details {
+    width: 90%;
+    display: flex;
+    align-items: center;
+  }
+  .restaurant-info {
+    color: #fff;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 180px;
+    justify-content: space-around;
+  }
+  .restaurant-det-name {
+    color: #fff;
+  }
+  .restaurant-image {
+    height: 220px;
+    width: 380px;
+    border-radius: 10px;
+  }
+  .restaurant-details-bottom-container {
+    display: flex;
+    justify-content: center;
+  }
+  .items-container {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    width: 90%;
+    margin: 30px 0;
+    box-sizing: border-box;
+  }
+  .rating-det-cost {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+  }
+  .hr {
+    height: 25px;
+    width: 1px;
+  }
+  .r-c {
+    display: flex;
+    flex-direction: column;
+  }
+  .s-r {
+    display: flex;
+  }
+  .s-r p {
+    margin-left: 10px;
+  }
 }

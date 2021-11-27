@@ -92,7 +92,7 @@ class RestaurantItems extends Component {
               <div className="rating-det-cost">
                 <div className="r-c">
                   <div className="s-r">
-                    <BsFillStarFill />
+                    <BsFillStarFill className="star" />
                     <p className="restaurant-rating">{rating}</p>
                   </div>
                   <p className="tags">{`${reviewsCount}+rating`}</p>

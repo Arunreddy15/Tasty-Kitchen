@@ -1,5 +1,5 @@
 import {Component} from 'react'
-
+import {Link} from 'react-router-dom'
 import Context from '../../context/Context'
 import './index.css'
 import EmptyCart from '../EmptyCart'
@@ -31,7 +31,7 @@ class Cart extends Component {
           const showEmptyView = cartList.length === 0
 
           return (
-            <>
+            <div className="">
               <Navbar />
               <div className="cart-container">
                 {showEmptyView ? (
@@ -54,7 +54,9 @@ class Cart extends Component {
                           type="button"
                           onClick={this.onClickPlace}
                         >
-                          Place Order
+                          <Link to="/success" className="place-link">
+                            Place Order
+                          </Link>
                         </button>
                       </div>
                     </div>
@@ -62,7 +64,7 @@ class Cart extends Component {
                 )}
               </div>
               <Footer />
-            </>
+            </div>
           )
         }}
       </Context.Consumer>

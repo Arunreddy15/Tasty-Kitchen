@@ -32,6 +32,10 @@ class Items extends Component {
             this.button()
             console.log(itemsCount)
             addCartItem({...item, itemsCount})
+            localStorage.setItem(
+              'cart',
+              JSON.stringify([{...item, itemsCount}]),
+            )
           }
 
           return (
@@ -56,7 +60,7 @@ class Items extends Component {
                       onClick={this.onClickMinus}
                       testid="decrement-count"
                     />
-                    {itemsCount}
+                    <p className="count">{itemsCount}</p>
                     <AiOutlinePlusSquare
                       onClick={this.onClickPlus}
                       testid="increment-count"

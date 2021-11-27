@@ -8,6 +8,7 @@ import Cart from './components/Cart'
 import './App.css'
 import RestaurantItems from './components/RestaurantItems'
 import Context from './context/Context'
+import SuccessPayment from './components/SuccessPayment'
 
 class App extends Component {
   state = {cartList: []}
@@ -31,6 +32,34 @@ class App extends Component {
     }
   }
 
+  incrementQuantity = id => {
+    this.setState(prevState => ({
+      cartList: prevState.cartList.map(each => {
+        if (each.id === id) {
+          const upQuery = each.itemCount + 1
+          return {...each, itemCount: upQuery}
+        }
+        return each
+      }),
+    }))
+  }
+
+  decrementQuantity = id => {
+    const {cartList} = this.state
+    const itemObject = cartList.find(each => each.id === id)
+    if (itemObject.itemCount > 1) {
+      this.setState(prevState => ({
+        cartList: prevState.cartList.map(each => {
+          if (each.id === id) {
+            const upQuery = each.itemCount - 1
+            return {...each, itemCount: upQuery}
+          }
+          return each
+        }),
+      }))
+    }
+  }
+
   render() {
     const {cartList} = this.state
 
@@ -39,6 +68,8 @@ class App extends Component {
         value={{
           cartList,
           addCartItem: this.addCartItem,
+          incrementQuantity: this.incrementQuantity,
+          decrementQuantity: this.decrementQuantity,
         }}
       >
         <Switch>
@@ -49,6 +80,7 @@ class App extends Component {
             path="/restaurant/:id"
             component={RestaurantItems}
           />
+          <ProtectedRoute exact path="/success" component={SuccessPayment} />
           <ProtectedRoute exact path="/cart" component={Cart} />
           <ProtectedRoute exact path="/bad-path" component={NotFound} />
           <ProtectedRoute component={NotFound} />

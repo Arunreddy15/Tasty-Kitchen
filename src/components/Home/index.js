@@ -89,6 +89,7 @@ class Home extends Component {
     const response = await fetch(url, options)
 
     const data = await response.json()
+    console.log(data)
     const {total} = data
     if (response.ok === true) {
       const restaurantsObject = data.restaurants.map(each => ({
@@ -268,14 +269,18 @@ class Home extends Component {
               </div>
               <hr />
               <div>
-                <div>
+                <div className="search-input-box">
                   <input
                     type="search"
                     placeholder="Enter restaurant name"
                     onChange={this.onChangeSearch}
                     value={searchInput}
                   />
-                  <BsSearch size={24} onClick={this.onClickSearch} />
+                  <BsSearch
+                    className=""
+                    size={22}
+                    onClick={this.onClickSearch}
+                  />
                 </div>
                 {this.renderData()}
                 <div className="pagination">
