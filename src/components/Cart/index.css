@@ -77,7 +77,7 @@
   .cart-container {
     display: flex;
     justify-content: center;
-    height: 50vh;
+    /* height: 50vh; */
   }
   .cart-content-container {
     margin: 30px 0;

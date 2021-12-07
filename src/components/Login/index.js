@@ -13,7 +13,7 @@ class Login extends Component {
   submitSuccess = jwtToken => {
     const {history} = this.props
     Cookies.set('jwt_token', jwtToken, {expires: 30})
-    history.replace('/')
+    history.push('/')
   }
 
   submitFailure = error => {
@@ -85,28 +85,43 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login-container">
-        <div className="details-container">
-          <div className="container">
-            <img
-              src="https://res.cloudinary.com/imagelinks/image/upload/v1636799192/Frame_274_xmzte1.png"
-              alt="website logo"
-              className="logo-pic"
-            />
-            <p className="logo-text">Tasty Kitchens</p>
-            <h1 className="login-text">Login</h1>
+      <>
+        <div className="login-container-desktop">
+          <div className="details-container">
+            <div className="container">
+              <img
+                src="https://res.cloudinary.com/imagelinks/image/upload/v1636799192/Frame_274_xmzte1.png"
+                alt="website logo"
+                className="logo-pic"
+              />
+              <p className="logo-text">Tasty Kitchens</p>
+              <h1 className="login-text">Login</h1>
 
-            {this.renderFormContainer()}
+              {this.renderFormContainer()}
+            </div>
+          </div>
+          <div className="image-container">
+            <img
+              src="https://res.cloudinary.com/imagelinks/image/upload/v1636798203/Rectangle_1456_xwkqpk.png"
+              alt="website login"
+              className="login-pic"
+            />
           </div>
         </div>
-        <div className="image-container">
-          <img
-            src="https://res.cloudinary.com/imagelinks/image/upload/v1636798203/Rectangle_1456_xwkqpk.png"
-            alt="website login"
-            className="login-pic"
-          />
+        <div className="login-container">
+          <div className="image-mobile-login">
+            <div className="log-image">
+              <img
+                src="https://res.cloudinary.com/imagelinks/image/upload/v1638259954/res-console.cloudinary_p68k4u.png"
+                alt="mobile"
+                className="pic"
+              />
+            </div>
+          </div>
+          <h1 className="login-text">Login</h1>
+          {this.renderFormContainer()}
         </div>
-      </div>
+      </>
     )
   }
 }

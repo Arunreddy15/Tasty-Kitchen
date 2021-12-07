@@ -15,10 +15,44 @@ const apiConstants = {
   inProgress: 'IN_PROGRESS',
 }
 class RestaurantItems extends Component {
-  state = {apiStatus: apiConstants.initial, restaurantItems: []}
+  state = {
+    apiStatus: apiConstants.initial,
+    restaurantItems: [],
+    quantity: 0,
+    cartList: [],
+  }
 
   componentDidMount() {
     this.getItems()
+  }
+
+  increment = id => {
+    this.setState(prevState => ({
+      cartList: prevState.cartList.map(eachItem => {
+        if (id === eachItem.id) {
+          const updatedQuery = eachItem.quantity + 1
+          return {...eachItem, quantity: updatedQuery}
+        }
+        return eachItem
+      }),
+    }))
+  }
+
+  decrement = () => {}
+
+  addCart = product => {
+    const {cartList} = this.state
+
+    this.setState(
+      prevState => ({
+        cartList: [
+          ...prevState.cartList,
+          {...product, quantity: prevState.quantity + 1},
+        ],
+      }),
+      this.increment,
+      localStorage.setItem('cartList', JSON.stringify(cartList)),
+    )
   }
 
   getItems = async () => {
@@ -68,7 +102,7 @@ class RestaurantItems extends Component {
   )
 
   renderData = () => {
-    const {restaurantItems} = this.state
+    const {restaurantItems, quantity} = this.state
     const {
       imageUrl,
       name,
@@ -110,7 +144,13 @@ class RestaurantItems extends Component {
         <div className="restaurant-details-bottom-container">
           <ul className="items-container">
             {foodItems.map(each => (
-              <Items item={each} />
+              <Items
+                item={each}
+                quantity={quantity}
+                increment={this.increment}
+                decrement={this.decrement}
+                addCart={this.addCart}
+              />
             ))}
           </ul>
         </div>
