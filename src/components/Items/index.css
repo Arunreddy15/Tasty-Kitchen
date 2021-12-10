@@ -10,7 +10,9 @@
     width: 100%;
     margin-right: 20px;
     margin-bottom: 30px;
+    padding: 10px;
   }
+
   .item-image {
     height: 90px;
     width: 110px;
@@ -53,6 +55,13 @@
     width: 47.5%;
     margin-right: 20px;
     margin-bottom: 30px;
+    transition: 0.5s;
+    padding: 20px;
+    border-radius: 12px;
+  }
+  .item-container:hover {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+    border-right: 50px solid #f7931e;
   }
   .item-image {
     height: 120px;

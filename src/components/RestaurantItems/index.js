@@ -146,6 +146,7 @@ class RestaurantItems extends Component {
             {foodItems.map(each => (
               <Items
                 item={each}
+                key={each.id}
                 quantity={quantity}
                 increment={this.increment}
                 decrement={this.decrement}

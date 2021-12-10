@@ -17,29 +17,6 @@ const Items = props => {
   const onClickAddCart = () => {
     addCart(item)
   }
-  //   const onClickAddCart = () => {
-  //     this.button()
-  //     console.log(itemsCount)
-  //     //   this.setState({cartList: {...item, itemsCount}})
-  //     //   addCartItem({...item, itemsCount})
-  //     const productObj = cartList.find(each => each.id === id)
-  //     if (productObj) {
-  //       this.setState(prevState => ({
-  //         cartList: prevState.cartList.map(each => {
-  //           if (each.id === id) {
-  //             const updateQuantity = each.itemsCount + item.itemsCount
-  //             return {...each, quantity: updateQuantity}
-  //           }
-  //           return each
-  //         }),
-  //       }))
-  //     } else {
-  //       const upCart = [...cartList, item]
-  //       this.setState({cartList: upCart})
-  //     }
-  //     localStorage.setItem('cart', JSON.stringify(cartList))
-  //   }
-
   return (
     <li key={id} testid="foodItem" className="item-container">
       <img src={imageUrl} alt={name} className="item-image" />

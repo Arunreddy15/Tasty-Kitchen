@@ -4,7 +4,7 @@
   box-sizing: border-box;
   font-family: DM Sans;
 }
-@media (min-width: 552px) {
+@media screen and (min-width: 776px) {
   .home-container {
     display: flex;
     justify-content: center;
@@ -65,6 +65,21 @@
   }
   span {
     font-weight: 500;
+  }
+  .search-input-box {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .search-input-box input {
+    width: 30%;
+    height: 35px;
+    margin: 0;
+    font-size: 16px;
+    padding-left: 10px;
+  }
+  .search-input-box .search-icon {
+    margin-left: 10px;
   }
   .icon {
     margin-right: 10px;
@@ -166,7 +181,7 @@
   }
 }
 
-@media (max-width: 552px) {
+@media (max-width: 776px) {
   .home-container {
     display: flex;
     justify-content: center;
@@ -326,5 +341,8 @@
     height: 30px;
     margin: 0;
     font-size: 15px;
+  }
+  .search-input-box .search-icon {
+    margin-left: 5px;
   }
 }

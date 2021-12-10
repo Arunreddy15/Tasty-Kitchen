@@ -277,7 +277,7 @@ class Home extends Component {
                     value={searchInput}
                   />
                   <BsSearch
-                    className=""
+                    className="search-icon"
                     size={22}
                     onClick={this.onClickSearch}
                   />
