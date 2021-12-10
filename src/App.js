@@ -17,7 +17,7 @@ const App = () => (
     <ProtectedRoute exact path="/restaurant/:id" component={RestaurantItems} />
     <ProtectedRoute exact path="/success" component={SuccessPayment} />
     <ProtectedRoute exact path="/cart" component={Cart} />
-    <ProtectedRoute exact path="/bad-path" component={NotFound} />
+    <ProtectedRoute path="/bad-path" component={NotFound} />
     <ProtectedRoute component={NotFound} />
   </Switch>
 )

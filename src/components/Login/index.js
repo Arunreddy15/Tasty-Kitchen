@@ -1,4 +1,5 @@
 import {Component} from 'react'
+
 import Cookies from 'js-cookie'
 import './index.css'
 
@@ -41,7 +42,6 @@ class Login extends Component {
 
     if (response.ok === true) {
       this.submitSuccess(data.jwt_token)
-      console.log(data)
     } else {
       this.submitFailure(data.error_msg)
     }
@@ -84,6 +84,11 @@ class Login extends Component {
   }
 
   render() {
+    const {history} = this.props
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken !== undefined) {
+      history.replace('/')
+    }
     return (
       <>
         <div className="login-container-desktop">

@@ -13,8 +13,7 @@ const NotFound = () => (
       />
       <h1 className="error-heading">Page Not Found</h1>
       <p className="error-description">
-        we are sorry, the page you requested would not be found <br />
-        Please go back to the home page
+        we are sorry, the page you requested could not be found
       </p>
       <Link to="/" className="nav-link">
         <button type="button" className="error-page-btn">
