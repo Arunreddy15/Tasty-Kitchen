@@ -10,7 +10,13 @@ export default function Footer() {
   return (
     <div>
       <div className="footer-container">
-        <h1 className="footer-heading">Tasty Kitchens </h1>
+        <div className="logo-container">
+          <img
+            alt="website-footer-logo"
+            src="https://res.cloudinary.com/imagelinks/image/upload/v1639117231/Group_7420_n3rpmk.png"
+          />
+          <h1 className="footer-heading">Tasty Kitchens </h1>
+        </div>
         <p className="footer-description">
           The only thing we are serious about it Food.
           <br />
