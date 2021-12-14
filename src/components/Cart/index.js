@@ -1,5 +1,5 @@
 import {Component} from 'react'
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 import './index.css'
 import EmptyCart from '../EmptyCart'
@@ -7,18 +7,18 @@ import Navbar from '../Navbar'
 import Footer from '../Footer'
 import CartItem from '../CartItem'
 
+const cartListItems = localStorage.getItem('cartItem')
+
 class Cart extends Component {
   state = {}
 
   componentDidMount() {
     const item = localStorage.getItem('cartList')
-    console.log(item)
     this.setState({cartItems: item})
   }
   // const showEmptyView=cartList.length===0
 
-  // const cartListItems = localStorage.getItem('cartItem')
-
+  //
   cartListView = () => {
     const {cartItems} = this.state
     return (
@@ -36,7 +36,7 @@ class Cart extends Component {
         <Navbar />
         <div className="cart-container">
           <EmptyCart />
-          {/* {cartListItems.length ? (
+          {cartListItems.length ? (
             <EmptyCart />
           ) : (
             <div className="cart-content-container">
@@ -63,7 +63,7 @@ class Cart extends Component {
                 </div>
               </div>
             </div>
-          )} */}
+          )}
         </div>
         <Footer />
       </div>

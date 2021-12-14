@@ -39,7 +39,6 @@
   font-style: italic;
   color: #f7931e;
   font-size: 22px;
-  margin-left: 15px;
   font-weight: 600;
 }
 .logout-btn {
@@ -70,7 +69,7 @@
     font-style: italic;
     color: #f7931e;
     font-size: 18px;
-    margin-left: 10px;
+
     font-weight: 600;
   }
   .links-container-mobile {

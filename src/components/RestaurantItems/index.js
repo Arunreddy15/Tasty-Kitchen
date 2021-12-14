@@ -50,7 +50,6 @@ class RestaurantItems extends Component {
           {...product, quantity: prevState.quantity + 1},
         ],
       }),
-      this.increment,
       localStorage.setItem('cartList', JSON.stringify(cartList)),
     )
   }
